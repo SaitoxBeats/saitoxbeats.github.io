@@ -13,6 +13,7 @@
 }
 
 body {
+	background-color: black;
 	/* Exibição flexível.                          */
 	/* Torna o elemento um flex container          */
 	/* e os seus elementos internos em flex-itens. */
@@ -34,7 +35,7 @@ body {
 /* Formatação comum entre os elementos. */
 header, nav, main, aside, footer {
 	/* Cor do fundo. */
-	background: #a1a1a1;
+	color: #ffffff;
 
 	/* Exibição flexível.                          */
 	/* Torna o elemento um flex container          */
@@ -57,19 +58,13 @@ header {
 }
 
 header #logo {
-	/* Exibição flexível.                          */
-	/* Torna o elemento um flex container          */
-	/* e os seus elementos internos em flex-itens. */
 	display: flex;
 
 	/* Junção de flex-grow, flex-shrink e flex-basis.  */
 	/* flex-grow – Habilidade de um flex item crescer. */
 	/* flex-shrink - Capacidade de redução do item.    */
 	/* flex-basis – Tamanho inicial do item.           */
-	flex: 0 1 200px;
-
-	/* Cor do fundo. */
-	background: #c9c9c9;
+	flex: 1 1 100px;
 
 	/* Alinha os itens na vertical. */
 	justify-content: center;
