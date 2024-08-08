@@ -178,10 +178,12 @@ body:before {
 	transform: scale(1);
 	width: 100vw;
 	z-index: 0;
-	background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201024%201024%22%20width%3D%221024%22%20height%3D%221024%22%20preserveAspectRatio%3D%22none%22%3E%20%3Cstyle%3E%20path%20%7B%20stroke-linecap%3A%20square%3B%20stroke-width%3A%201.01px%3B%20stroke%3A%20rgba(255,255,255,0.071)%3B%20vector-effect%3A%20non-scaling-stroke%3B%20%7D%20%3C%2Fstyle%3E%20%3Cpath%20d%3D%22M%20256%20192%20L%20256%20320%20M%20192%20256%20L%20320%20256%22%20%2F%3E%20%3Cpath%20d%3D%22M%20768%20704%20L%20768%20832%20M%20704%20768%20L%20832%20768%22%20%2F%3E%3C%2Fsvg%3E'), linear-gradient(252deg, transparent 0%, transparent 0%, rgba(0, 0, 0, 0.588) 100%), url('/img/bg.png');
-	background-size: 425px, cover, cover;
-	background-position: center, 0% 0%, center;
-	background-repeat: repeat, repeat, no-repeat;
+	background-image: url('/img/bg.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+    margin: 0;
+    overflow: hidden;
 	background-color: #000000;
 }
 
