@@ -178,7 +178,7 @@ body:before {
 	transform: scale(1);
 	width: 100vw;
 	z-index: 0;
-	background-image: url('/img/bg.png');
+	background-image: url('https://raw.githubusercontent.com/TheTrustAll/TrustAll/main/img/bg.png');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
