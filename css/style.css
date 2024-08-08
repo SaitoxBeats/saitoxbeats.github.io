@@ -1,0 +1,74 @@
+@keyframes grow {
+    0% {
+        transform: scale(0.7);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes blurGrow {
+    0% {
+        filter: blur(100px);
+    }
+    100% {
+        filter: blur(0px);
+    }
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: hsl(0, 0%, 0%);
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    font-size: 20px;
+    color: #fff;
+}
+
+/* Definindo o estado inicial dos textos */
+.texto {
+    opacity: 0;
+    filter: blur(10px);
+    transition: opacity 2s ease, filter 2s ease;
+    transition-delay: 1s; /* Delay antes do início da transição */
+}
+
+/* Estado final após a transição */
+.texto.visible {
+    opacity: 1;
+    filter: blur(0px);
+}
+
+
+subheader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1vh;
+    animation: grow 8s ease 2s, blurGrow 3s ease 2s;
+}
+
+main {
+    display: flex;
+    padding: 1rem;
+    color: #fff;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;
+    
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
