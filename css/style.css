@@ -1,7 +1,28 @@
+@font-face {
+    font-family: 'ClashGrotesk-Medium';
+    src: url('fonts/ClashGrotesk-Medium.woff2') format('woff2'),
+         url('fonts/ClashGrotesk-Medium.woff') format('woff'),
+         url('fonts/ClashGrotesk-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-display: swap;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ClashGrotesk-Bold';
+    src: url('fonts/ClashGrotesk-Bold.woff2') format('woff2'),
+         url('fonts/ClashGrotesk-Bold.woff') format('woff'),
+         url('fonts/ClashGrotesk-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-display: swap;
+    font-style: normal;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Zetta:wght@100..900&display=swap');
 
 html {
     scroll-behavior: smooth;
+    font-family: 'ClashGrotesk-Medium';
 }
 
 header {
@@ -39,8 +60,6 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     color: rgb(255, 255, 255);
-
-    font-family: 'Lexend Zetta';
 }
 
 main {
@@ -54,38 +73,40 @@ main {
     justify-items: start;
     justify-content: space-evenly;
     gap: 100px;
-    mix-blend-mode: difference;
 }
 
 .mainmenu {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     padding-top: 100px; /* Ajuste conforme necessário */
     text-shadow: 0px 0px 20px #000000;
 }
 
-.HI {
-    font-size: clamp(5px, 2vw, 24px);
-    letter-spacing: clamp(0px, 2vw, 100px);
-    text-align: center;
+.mainmenu h2 {
+    font-size: 30px;
+    margin: 0;
 }
 
-.TRUST {
-    font-size: clamp(1.2rem, 7vw, 7rem);
-    letter-spacing: clamp(1.2rem, 7vw, 7rem);
-    text-align: center;
-
+.mainmenu h1 {
+    font-family: 'ClashGrotesk-Bold';
+    font-size: 200px;
+    letter-spacing: -10px;
+    transform: scaleY(2);
+    transform: scaleX(2);
+    margin: 0;
     transition: all 1s ease 0s;
 }
 
-.TRUST:hover {
-    transform: scale(1.1);
+.mainmenu h1:hover {
+    font-size: 205px;
+    letter-spacing: 0px;
 }
 
-.Recents {
-    font-size: clamp(5px, 2vw, 24px);
-    letter-spacing: 0px;
+.mainmenu h3 {
+    font-size: 24px;
+    margin: 0;
     text-align: center;
 }
 
@@ -96,6 +117,7 @@ main {
     flex-direction: column;
     border: 2px solid #ffffff2d;
     border-radius: 12px;
+    backdrop-filter: blur(30px);
 }
 
 .SongRect {
@@ -109,7 +131,7 @@ main {
     align-content: stretch;
     justify-items: center;
     justify-content: space-between;
-    gap: clamp(12px, 30vw, 400px);
+    gap: 500px;
 
     text-shadow: 0px 0px 12px #000000;
     font-size: medium;
@@ -149,6 +171,11 @@ main {
     align-self: center;
     border-radius: 20px;
     border: 2px solid #ffffff41;
+}
+
+.me{
+    font-size: 40px;
+    margin: 0;
 }
 
 .Date {
