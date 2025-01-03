@@ -113,11 +113,9 @@ main {
 .SongsMenu {
     list-style-type: none;
     padding: 0;
-    display: flex;
     flex-direction: column;
     border: 2px solid #ffffff2d;
     border-radius: 12px;
-    backdrop-filter: blur(30px);
 }
 
 .SongRect {
@@ -149,6 +147,46 @@ main {
     display: flex;
     flex-direction: row;
     gap: 10px; /* Espaçamento entre itens */
+}
+
+#m_0{
+    background-image: url('https://i1.sndcdn.com/artworks-XJdBNy1hYvnZEpBh-45iTrA-t500x500.jpg');
+    background-size: auto;
+    background-position: 0px;
+    border-radius: 12px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ffffff2d;
+}
+
+#m_1{
+    background-image: url('https://i1.sndcdn.com/artworks-fzuzHN0Qqi8yZFCO-nnT0aw-t500x500.png');
+    background-size: auto;
+    background-position: 0px;
+    border-radius: 12px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ffffff2d;
+}
+
+#m_2{
+    background-image: url('https://i1.sndcdn.com/artworks-5dGcqiVwjzNg28dz-pcbiBA-t500x500.png');
+    background-size: auto;
+    background-position: 0px;
+    border-radius: 12px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ffffff2d;
+}
+
+#m_3{
+    background-image: url('https://i1.sndcdn.com/artworks-QcLST9j2Uaf1vrQ2-tbuyDQ-t500x500.png');
+    background-size: auto;
+    background-position: 0px;
+    border-radius: 12px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ffffff2d;
 }
 
 .SocialBT {
