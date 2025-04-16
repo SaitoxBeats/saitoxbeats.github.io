@@ -1,0 +1,110 @@
+body{
+    background: #000000;
+    padding: 0;
+    margin: 0;
+}
+.frame{
+    position: absolute;
+    border: 1px solid #ffffff;
+    background: #e7e7e7;
+    box-shadow: 0 1px 10px #111;
+    z-index: 10;
+    overflow: hidden;
+}
+.topbar{
+    padding: 5px;
+    text-align: right;
+    cursor: default;
+    background: #000000;
+}
+.xbtn, .maxbtn{
+    padding: 2px 4px;
+    text-align: center;
+    border-radius: 2px;
+    color: #ffffff;
+    display: inline-block;
+    vertical-align: top;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    margin-top: -3px;
+}
+.window-title{
+    float: left;
+    padding: 2px 4px;
+    text-align: center;
+    border-radius: 2px;
+    color: #ffffff;
+    display: inline-block;
+    vertical-align: top;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    margin-top: -3px;
+}
+.maxbtn span{
+    display: block;
+    border: 1px solid #ffffff;
+    border-top: 2px solid #ffffff;
+    width: 9px;
+    height: 8px;
+    margin-top: 6px;
+}
+.maxbtn:hover span, .maximized .maxbtn span{
+    border-color: #e7e7e7;
+}
+.xbtn:hover{
+    color: #e7e7e7;
+}
+.content{
+    height: auto;
+    width: auto;
+    padding: 15px;
+    border: 1px solid #ffffff;
+    background-color: #000000;
+    color: white;
+}
+.content>div{
+    width: inherit;
+    height: inherit;
+}
+.content>iframe{
+    width: inherit;
+    height: inherit;
+}
+textarea{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+      outline: none;
+      -webkit-appearance: none;
+      background: #e7e7e7;
+      color: #333;
+      font-size: 16px;
+      font-weight: normal;
+      font-family: 'Courier New', Courier, monospace;
+      text-shadow: 0 1px 0 #fff;
+      resize: none;
+}
+.active{
+    z-index: 999999;
+}
+
+.frame.maximized{
+    top: 1% !important;
+    left: 1% !important;
+    width: 98% !important;
+    height: 98% !important;
+    -moz-transition: width .25s ease-in-out, height .25s ease-in-out, top .25s ease-in-out, left .25s ease-in-out;
+    -webkit-transition: width .25s ease-in-out, height .25s ease-in-out, top .25s ease-in-out, left .25s ease-in-out;
+    transition: width .25s ease-in-out, height .25s ease-in-out, top .25s ease-in-out, left .25s ease-in-out;
+}
+
+.frame.maximized .content{
+    margin: 0 auto !important;
+    width: 95% !important;
+    height: 95% !important;
+    -moz-transition: width .25s ease-in-out, height .25s ease-in-out, top .25s ease-in-out, left .25s ease-in-out;
+    -webkit-transition: width .25s ease-in-out, height .25s ease-in-out, top .25s ease-in-out, left .25s ease-in-out;
+    transition: width .25s ease-in-out, height .25s ease-in-out, top .25s ease-in-out, left .25s ease-in-out;
+}

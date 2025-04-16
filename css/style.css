@@ -1,284 +1,89 @@
-@font-face {
-    font-family: 'ClashGrotesk-Medium';
-    src: url('fonts/ClashGrotesk-Medium.woff2') format('woff2'),
-         url('fonts/ClashGrotesk-Medium.woff') format('woff'),
-         url('fonts/ClashGrotesk-Medium.ttf') format('truetype');
-    font-weight: 500;
-    font-display: swap;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'ClashGrotesk-Bold';
-    src: url('fonts/ClashGrotesk-Bold.woff2') format('woff2'),
-         url('fonts/ClashGrotesk-Bold.woff') format('woff'),
-         url('fonts/ClashGrotesk-Bold.ttf') format('truetype');
-    font-weight: 700;
-    font-display: swap;
-    font-style: normal;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Zetta:wght@100..900&display=swap');
-
-html {
-    scroll-behavior: smooth;
-    font-family: 'ClashGrotesk-Medium';
-}
-
-header {
-    z-index: 1000;
-
-    width: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    position: fixed;
-    margin: 0;
-    padding: 12px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(12px, 15vw, 200px);
-
-    list-style-type: none;
-    background-color: black;
-    box-shadow: 0px 10px 20px 5px #000000;
-    mix-blend-mode: normal;
-}
-header, li, a {
+html{
+    font-family: 'Courier New', Courier, monospace;
     color: white;
-    transition: all 0.3s ease 0s;
 }
-header, li, a:hover {
-    color: rgb(156, 156, 156);
-}
-
-body {
-    background-color: rgb(0, 0, 0);
-    background-image: url('https://raw.githubusercontent.com/TheTrustAll/TrustAll/refs/heads/main/img/bg.png');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    color: rgb(255, 255, 255);
-}
-
-main {
-    height: auto;
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    align-content: stretch;
-    justify-items: start;
-    justify-content: space-evenly;
-    gap: 100px;
-}
-
-.mainmenu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding-top: 100px; /* Ajuste conforme necessário */
-    text-shadow: 0px 0px 20px #000000;
-}
-
-.mainmenu h2 {
-    font-size: 30px;
-    margin: 0;
-}
-
-.mainmenu h1 {
-    font-family: 'ClashGrotesk-Bold';
-    font-size: 200px;
-    letter-spacing: -10px;
-    transform: scaleY(2);
-    transform: scaleX(2);
-    margin: 0;
-    transition: all 1s ease 0s;
-}
-
-.mainmenu h1:hover {
-    font-size: 205px;
-    letter-spacing: 0px;
-}
-
-.mainmenu h3 {
-    font-size: 24px;
-    margin: 0;
-    text-align: center;
-}
-
-.SongsMenu {
-    list-style-type: none;
-    padding: 0;
-    flex-direction: column;
-    border: 2px solid #ffffff2d;
-    border-radius: 12px;
-}
-
-.SongRect {
-    background-color: rgba(0, 0, 0, 0.26);
-    color: #ffffff;
-    text-align: center;
-    padding: 5px 15px 5px 15px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: stretch;
-    justify-items: center;
-    justify-content: space-between;
-    gap: 500px;
-
-    text-shadow: 0px 0px 12px #000000;
-    font-size: medium;
-
-    transition: all 0.3s ease 0s;
-}
-
-.SongRect:hover {
-    background-color: rgba(255, 255, 255, 0.281);
+p{
     font-size: large;
 }
-.SocialsMenu {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    gap: 10px; /* Espaçamento entre itens */
-}
-
-#m_0{
-    background-image: url('https://i1.sndcdn.com/artworks-XJdBNy1hYvnZEpBh-45iTrA-t500x500.jpg');
-    background-size: auto;
-    background-position: 0px;
-    border-radius: 12px;
-    border-style: solid;
+a{
+    color: white;
+    background-color: black;
+    text-decoration: none;
+    text-align: center;
+    font-size: x-large;
+    border-color: white;
     border-width: 1px;
-    border-color: #ffffff2d;
-}
-
-#m_1{
-    background-image: url('https://i1.sndcdn.com/artworks-fzuzHN0Qqi8yZFCO-nnT0aw-t500x500.png');
-    background-size: auto;
-    background-position: 0px;
-    border-radius: 12px;
     border-style: solid;
-    border-width: 1px;
-    border-color: #ffffff2d;
+    margin: 0;
+    padding-inline: 15px;
+    transition: all 0.25s ease-in-out;
 }
-
-#m_2{
-    background-image: url('https://i1.sndcdn.com/artworks-5dGcqiVwjzNg28dz-pcbiBA-t500x500.png');
-    background-size: auto;
-    background-position: 0px;
-    border-radius: 12px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #ffffff2d;
+a:hover{
+    color: black;
+    background-color: white;
+    transition: all 0.25s ease-in-out;
 }
-
-#m_3{
-    background-image: url('https://i1.sndcdn.com/artworks-QcLST9j2Uaf1vrQ2-tbuyDQ-t500x500.png');
-    background-size: auto;
-    background-position: 0px;
-    border-radius: 12px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #ffffff2d;
-}
-
-.SocialBT {
-    width: 49px;
-    height: 49px;
-    background-color: rgb(20, 20, 20);
-    padding: 12px;
-    align-items: center;
-    align-content: center;
-    align-self: center;
-    border-radius: 20px;
-    border: 2px solid #ffffff00;
-
-    transition: all 0.3s ease 0s;
-}
-
-.SocialBT img {
-    width: 100%;
-    height: 100%;
-}
-
-.SocialBT:hover {
-    background-color: rgb(20, 20, 20);
-    padding: 15px;
-    align-items: center;
-    align-content: center;
-    align-self: center;
-    border-radius: 20px;
-    border: 2px solid #ffffff41;
-}
-
-@media (max-width: 900px) {
-    .mainmenu h2 {
-        font-size: 30px;
-        margin: 0;
-    }
-    
-    .mainmenu h1 {
-        font-family: 'ClashGrotesk-Bold';
-        font-size: 60px;
-        letter-spacing: -3px;
-        transform: scaleY(2);
-        transform: scaleX(2);
-        margin: 0;
-        transition: all 1s ease 0s;
-    }
-    
-    .mainmenu h1:hover {
-        font-size: 65px;
-        letter-spacing: 0px;
-    }
-
-    .SongsMenu {
-        list-style-type: none;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        border: 2px solid #ffffff2d;
-        border-radius: 12px;
-        backdrop-filter: blur(30px);
-    }
-    
-    .SongRect {
-        background-color: rgba(0, 0, 0, 0.26);
-        color: #ffffff;
-        text-align: center;
-        padding: 5px 15px 5px 15px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        align-content: stretch;
-        justify-items: center;
-        justify-content: space-between;
-        gap: 15px;
-    
-        text-shadow: 0px 0px 12px #000000;
-        font-size: medium;
-    
-        transition: all 0.3s ease 0s;
-    }
-    .SocialBT {
-        width: 100%;
-        transition: all 0.3s ease 0s;
-    }
-}
-
-.me{
-    font-size: 40px;
+#apresentation{
+    font-size: xx-large;
+    text-align: center;
     margin: 0;
 }
 
-.Date {
-    color: #ffffff48;
-    padding: 100px;
+#apresentation p{
+    margin: 0;
+}
+#apresentation h1{
+    margin: 0;
+}
+#myname{
+    transition: letter-spacing 1s ease-in-out;
+}
+#myname:hover{
+    letter-spacing: 15px;
+    transition: letter-spacing 1s ease-in-out;
+}
+b{
+    background-color: white;
+    color: black;
+}
+
+#about{
+    font-size: x-large;
+}
+
+nav{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 5px;
+}
+#wallpaper-list{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 10px;
+}
+.wallpaper-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-color: white;
+    border-width: 1px;
+    border-style: solid;
+    width: 80%;
+}
+.wallpaper-card img{
+    width: 100%;
+}
+.wallpaper-card p{
+    font-size: x-large;
+}
+
+#socials{
+    list-style: none;
+    margin: 15px;
+}
+
+#last-data{
+    color: rgba(255, 255, 255, 0.356);
 }

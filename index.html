@@ -1,41 +1,81 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Saitox</title>
-    </head>
-    <link rel="stylesheet" href="css/style.css">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saitox</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+</head>
+<link rel="stylesheet" href="css/style.css">
 
-    <header>
-        <li><a href="#Main" style="text-decoration: none;">Main</a></li>   
-        <li><a href="#Songs" style="text-decoration: none;">Songs</a></li> 
-        <li><a href="#Social" style="text-decoration: none;">Socials</a></li>
-        <li><a href="wallpapers.html" style="text-decoration: none;">Wallpapers</a></li>
-    </header>
-    
-    <body>
-        <main>
-           <nav class="mainmenu" id="Main">
-               <h2>HI MY NAME IS</h2>
-               <h1>Saitox</h1> 
-               <h3 id="Songs">Recent Songs</h3>
-           </nav>
-           <nav class="SongsMenu">
-                <li><a href="https://soundcloud.com/saitoxbeats/i-cant-believed" style="text-decoration: none;"><div class="SongRect" id="m_3">I can't believe it - Saitox<p>Cloud</p></div></a></li>
-                <li><a href="https://soundcloud.com/saitoxbeats/jerk" style="text-decoration: none;"><div class="SongRect" id="m_2">Jerk - Saitox<p>Cloud</p></div></a></li>
-                <li><a href="https://soundcloud.com/saitoxbeats/at-night-i-see-everything" style="text-decoration: none;"><div class="SongRect" id="m_1">at night I see everything - Saitox<p>Cloud</p></div></a></li>
-                <li><a href="https://soundcloud.com/saitoxbeats/mals" style="text-decoration: none;"><div class="SongRect" id="m_0">Mals - Saitox<p>Cloud</p></div></a></li>
-           </nav>
-           <p class="me">It's me</p>
-           <nav class="SocialsMenu" id="Social">
-                <li class="SocialBT"><a href="#"><img src="img/spotify.svg" alt="Spotify" loading="lazy"></a></li>
-                <li class="SocialBT"><a href="https://soundcloud.com/thetrustall"><img src="img/soundcloud.svg" alt="SoundCloud" loading="lazy"></a></li>
-                <li class="SocialBT"><a href="https://www.youtube.com/@TheTrustAll""><img src="img/youtube.svg" alt="Youtube" loading="lazy"></a></li>
-                <li class="SocialBT"><a href="https://x.com/SaitoxBeats"><img src="img/X.svg" alt="Twitter" loading="lazy"></a></li>
-                <li class="SocialBT"><a href="https://bytelower.itch.io/"><img src="https://torcado.com/windowkill/media/itchio.svg" alt="itchio" loading="lazy"></a></li>
-           </nav>
-           <p class="Date">Last edit (01/03/2025)</p>
-        </main>
-    </body>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="css/windows.css">
+<script src="js/script.js"></script>
+<body>
+    <main id="desktop">
+        <div class="frame" id="navbar-window">
+            <div class="topbar blue">
+                <div class="window-title">Nav.exe</div>
+                <div class="maxbtn"><span></span></div>
+                <div class="xbtn">x</div>
+            </div>
+            <div class="content">
+                <div id="navhtml">
+                    <nav>
+                        <li><a href="https://saitoxbeats.me/">Home</a></li>
+                        <li><a href="https://bytelower.itch.io/">Games</a></li>
+                        <li><a href="javascript:void(0)" onclick="openWindow('projects-window')">Projects</a></li>
+                        <li><a href="javascript:void(0)" onclick="openWindow('wallpaper-window')">Wallpapers</a></li>
+                        <li><a href="javascript:void(0)" onclick="openWindow('about-window')">about</a></li>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="frame" id="hello-window">
+            <div class="topbar blue">
+                <div class="window-title">Hello.cs (Debug)</div>
+                <div class="maxbtn"><span></span></div>
+                <div class="xbtn">x</div>
+            </div>
+            <div class="content">
+                <div id="apresentation">
+                    <p>Hello! my name is</p>
+                    <h1 id="myname"><b>Saitox</b></h1>
+                </div>
+            </div>
+        </div>
+        <div class="frame" id="projects-window">
+            <div class="topbar">
+                <div class="window-title">Projects.html</div>
+                <div class="maxbtn"><span></span></div>
+                <div class="xbtn">x</div>
+            </div>
+            <div class="content">
+                <iframe src="projects.html" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="frame" id="wallpaper-window">
+            <div class="topbar">
+                <div class="window-title">Wallpapers.html</div>
+                <div class="maxbtn"><span></span></div>
+                <div class="xbtn">x</div>
+            </div>
+            <div class="content">
+                <iframe src="wallpapers.html" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="frame" id="about-window">
+            <div class="topbar">
+                <div class="window-title">About.txt</div>
+                <div class="maxbtn"><span></span></div>
+                <div class="xbtn">x</div>
+            </div>
+            <div class="content">
+                <iframe src="about.html" frameborder="0"></iframe>
+            </div>
+        </div>
+    </main>
+</body>
 </html>
