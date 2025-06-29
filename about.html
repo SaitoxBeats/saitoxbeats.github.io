@@ -1,19 +1,49 @@
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="pStyles.css">
 
-<h1><b>---- About Me ----</b></h1>
-<p id="about">
-    Hello my name is <b>Saitox</b>
-    <br>I am a programmer, photographer, designer and artist in general.
-    <br>this is my <b>portfolio</b> site and also to present my projects
-    <br>feel free to look around the site, here you will find <b>wallpapers</b>, games and my photographs that I take on a daily basis.
-    <br>you can see all of this on <b>Nav.exe</b>
-</p>
-
-<h1><b>---- Socials ----</b></h1>
-<div id="socials">
-    <li><a href="https://www.youtube.com/@SaitoxBeats" target="_blank">Youtube</a></li>
-    <li><a href="https://x.com/SaitoxBeats" target="_blank">Twitter</a></li>
-    <li><a href="https://bytelower.itch.io/" target="_blank">Itch.io</a></li>
+<div id="bg-img">
+  <svg id="bg-wave" viewBox="0 0 1920 1080" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
+    style="position:absolute;top:0;left:0;width:100vw;height:100vh;z-index:-1;">
+    <filter id="wave">
+      <feTurbulence id="turb" baseFrequency="0.003 0.004" numOctaves="2" seed="2" type="turbulence" />
+      <feDisplacementMap in2="turb" in="SourceGraphic" scale="160" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <image x="0" y="0" width="1920" height="1080" xlink:href="assets/img/bgFront.png" style="filter:url(#wave);" />
+  </svg>
 </div>
 
-<span id="last-data">last update(16/04/2025) --NOT FOR USA LMAO</span>
+<body>
+  <h1 id="main-title"><strong>About me</strong></h1>
+  <nav>
+    <ul>
+      <li><button class="nav-button" onclick="sendSection('home')">Home</button></li>
+      <li><button class="nav-button" onclick="sendSection('projects')">Projects</button></li>
+      <li><button class="nav-button" onclick="sendSection('about')">About</button></li>
+    </ul>
+  </nav>
+
+  <div class="info-container">
+    <p id="about">Hello my name is <strong>Saitox</strong>
+      <br>
+      <br>I am a 3D Animator, programmer, photographer, designer and artist in general.
+      <br>this is my <strong>portfolio</strong> site and also to present my projects
+      <br>feel free to look around the site, here you will find <strong>wallpapers</strong>, games and my photographs
+      that I take on a daily basis.
+      <br>you can see all of this on <strong>Projects</strong>
+    </p>
+  </div>
+  <h1 id="main-title"><strong>Socials</strong></h1>
+  <div class="info-container">
+    <div id="socials">
+      <li><a href="https://www.youtube.com/@SaitoxBeats" target="_blank">Youtube </a></li>
+      <li><a href="https://x.com/SaitoxBeats" target="_blank">Twitter </a></li>
+      <li><a href="https://bytelower.itch.io/" target="_blank">Itch.io </a></li>
+      <li><a href="https://github.com/SaitoxBeats" target="_blank">GitHub </a></li>
+    </div>
+  </div>
+</body>
+<script>
+  function sendSection(section) {
+    window.parent.postMessage({ type: 'goToSection', section }, '*');
+  }
+</script>
+<script src="wave.js"></script>

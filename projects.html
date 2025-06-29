@@ -1,46 +1,217 @@
-<link rel="stylesheet" href="css/style.css">
-<style>
-    #photos-list{
-        display: flex;
-        flex-direction: column;
-        list-style: none;
-        gap: 15px;
-    }
-    .photos-card{
-        border-color: white;
-        border-width: 1px;
-        border-style: solid;
-        width: 40%;
-    }
-    .photos-card img{
-        width: 100%;
-    }
-</style>
-<h1><b>My Photographs</b></h1>
+<link rel="stylesheet" href="pStyles.css">
 
-<div id="photos-list">
-    <li>
-        <div class="photos-card">
-            <img src="https://pbs.twimg.com/media/Gny5h2yW4AMSxlL?format=jpg&name=small" alt="">
-            <a href="https://x.com/SaitoxBeats/status/1908604395903664330/photo/1"target=”_blank”>Original Post</a>
-        </div>
-    </li>
-    <li>
-        <div class="photos-card">
-            <img src="https://pbs.twimg.com/media/Gny5h48XsAAN_-J?format=jpg&name=small" alt="">
-            <a href="https://x.com/SaitoxBeats/status/1908604395903664330/photo/2"target=”_blank”>Original Post</a>
-        </div>
-    </li>
-    <li>
-        <div class="photos-card">
-            <img src="https://pbs.twimg.com/media/Gny5ig9XIAAi8CJ?format=jpg&name=small" alt="">
-            <a href="https://x.com/SaitoxBeats/status/1908604395903664330/photo/3"target=”_blank”>Original Post</a>
-        </div>
-    </li>
-    <li>
-        <div class="photos-card">
-            <img src="https://pbs.twimg.com/media/Gny5i92XEAAkOMd?format=jpg&name=small" alt="">
-            <a href="https://x.com/SaitoxBeats/status/1908604395903664330/photo/4"target=”_blank”>Original Post</a>
-        </div>
-    </li>
+<!-- bg -->
+<div id="bg-img">
+    <svg id="bg-wave" viewBox="0 0 1920 1080" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
+        style="position:absolute;top:0;left:0;width:100vw;height:100vh;z-index:-1;">
+        <filter id="wave">
+            <feTurbulence id="turb" baseFrequency="0.003 0.004" numOctaves="2" seed="2" type="turbulence" />
+            <feDisplacementMap in2="turb" in="SourceGraphic" scale="160" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+        <image x="0" y="0" width="1920" height="1080" xlink:href="assets/img/bgFront.png" style="filter:url(#wave);" />
+    </svg>
 </div>
+
+<body>
+    <h1 id="main-title"><strong>Projects</strong></h1>
+    <nav>
+        <ul>
+            <li><button class="nav-button" onclick="sendSection('home')">Home</button></li>
+            <li><button class="nav-button" onclick="sendSection('projects')">Projects</button></li>
+            <li><button class="nav-button" onclick="sendSection('about')">About</button></li>
+        </ul>
+    </nav>
+
+    <div class="info-container">
+        <p id="about">Here you can find all my <strong>projects</strong>, from <strong>games</strong> to
+            <strong>wallpapers</strong> and more.
+            <br>
+            <br>Feel free to look around and download anything you like.
+            <br><strong>All of my wallpapers and Photos</strong> are free to use and share, but please give credit where
+            it's due.
+            <br>Enjoy!
+        </p>
+    </div>
+    <nav id="projects-nav">
+        <ul>
+            <li><button class="nav-button">3D Animations</button></li>
+            <li><button class="nav-button">Games</button></li>
+            <li><button class="nav-button">Wallpapers</button></li>
+            <li><button class="nav-button">Photos</button></li>
+        </ul>
+    </nav>
+
+    <div id="projects-sections">
+        <div id="3dAnims">
+            <h1 id="main-title"><strong>3D Animations</strong></h1>
+            <div class="info-container">
+                <p id="about">Here you can find my 3D animations, created using Blender and Maya</p>
+                <div id="anims-container">
+                    <p id="about">Animation Reel 2025 (Saitox)</p>
+                    <iframe id="animsFrame" width="420" height="225" src="https://www.youtube.com/embed/1stSiUTBbIE">
+                </iframe>
+                </div>
+            </div>
+        </div>
+
+        <div id="Games">
+            <h1 id="main-title"><strong>Games</strong></h1>
+            <div class="info-container">
+                <p id="about">Here you can find my games and interactive projects</p>
+            </div>
+            <div class="games-container">
+                <ul id="game-list">
+                    <li>
+                        <a class="game-item" href="https://bytelower.itch.io/god-is-silent">
+                            GOD IS SILENT <span class="game-date">12/03/2025</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="game-item" href="https://bytelower.itch.io/cpu-roulette">
+                            CPURoulette <span class="game-date">07/01/2025</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="game-item" href="https://bytelower.itch.io/scopophobia">
+                            Scopophobia <span class="game-date">04/08/2024</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="Wallpapers">
+            <h1 id="main-title"><strong>Wallpapers</strong></h1>
+            <div class="info-container">
+                <p id="about">Here you can find my wallpapers, free to download and use</p>
+            </div>
+            <div class="wallpaper-grid">
+                <a href="https://pbs.twimg.com/media/Gj4izcNWkAAGk4t?format=jpg&name=large" target="_blank"
+                    class="wallpaper-item">
+                    <img src="https://pbs.twimg.com/media/Gj4izcNWkAAGk4t?format=jpg&name=large" alt="Bride"
+                        class="wallpaper-thumb">
+                </a>
+                <a href="https://pbs.twimg.com/media/Gi_c0XyXoAEaZwO?format=jpg&name=large" target="_blank"
+                    class="wallpaper-item">
+                    <img src="https://pbs.twimg.com/media/Gi_c0XyXoAEaZwO?format=jpg&name=large" alt="Bride"
+                        class="wallpaper-thumb">
+                </a>
+                <a href="https://pbs.twimg.com/media/GiwFzRsX0AAq5Z_?format=jpg&name=large" target="_blank"
+                    class="wallpaper-item">
+                    <img src="https://pbs.twimg.com/media/GiwFzRsX0AAq5Z_?format=jpg&name=large" alt="Bride"
+                        class="wallpaper-thumb">
+                </a>
+                <a href="https://pbs.twimg.com/media/Gie6u5sW4AASmVx?format=jpg&name=large" target="_blank"
+                    class="wallpaper-item">
+                    <img src="https://pbs.twimg.com/media/Gie6u5sW4AASmVx?format=jpg&name=large" alt="Bride"
+                        class="wallpaper-thumb">
+                </a>
+                <a href="https://pbs.twimg.com/media/GiZGcGoWEAMwIfH?format=jpg&name=large" target="_blank"
+                    class="wallpaper-item">
+                    <img src="https://pbs.twimg.com/media/GiZGcGoWEAMwIfH?format=jpg&name=large" alt="Bride"
+                        class="wallpaper-thumb">
+                </a>
+                <a href="assets/Wallpapers/WL_Bride.png" target="_blank" class="wallpaper-item">
+                    <img src="assets/Wallpapers/WL_Bride_Reduce.png" alt="Bride" class="wallpaper-thumb">
+                </a>
+                <a href="assets/Wallpapers/WL_JustTrustFlag.png" target="_blank" class="wallpaper-item">
+                    <img src="assets/Wallpapers/WL_JustTrustFlag_Reduce.png" alt="Just Trust Flag"
+                        class="wallpaper-thumb">
+                </a>
+                <a href="assets/Wallpapers/WL_TrustSpripe.png" target="_blank" class="wallpaper-item">
+                    <img src="assets/Wallpapers/WL_TrustSpripe_Reduce.png" alt="Trust Stripe" class="wallpaper-thumb">
+                </a>
+                <a href="assets/Wallpapers/WL_WebElements.png" target="_blank" class="wallpaper-item">
+                    <img src="assets/Wallpapers/WL_WebElements_Reduce.png" alt="Web Elements" class="wallpaper-thumb">
+                </a>
+                <a href="assets/Wallpapers/WL_Wine.png" target="_blank" class="wallpaper-item">
+                    <img src="assets/Wallpapers/WL_Wine_Reduce.png" alt="Wine" class="wallpaper-thumb">
+                </a>
+                <a href="assets/Wallpapers/WT_stg_danger.png" target="_blank" class="wallpaper-item">
+                    <img src="assets/Wallpapers/WT_stg_danger_Reduce.png" alt="Stage Danger" class="wallpaper-thumb">
+                </a>
+            </div>
+        </div>
+
+        <div id="Photos">
+            <h1 id="main-title"><strong>Photos</strong></h1>
+            <div class="info-container">
+                <p id="about">Here you can find my photographs and photo projects</p>
+            </div>
+            <div class="wallpaper-grid">
+                <a href="https://x.com/SaitoxBeats/status/1908604395903664330/photo/1" target="_blank"
+                    class="wallpaper-item">
+                    <img src="https://pbs.twimg.com/media/Gny5h2yW4AMSxlL?format=jpg&name=small"
+                        alt="Trust Stripe Photo" class="wallpaper-thumb">
+                </a>
+                <a href="https://x.com/SaitoxBeats/status/1908604395903664330/photo/2" target="_blank"
+                    class="wallpaper-item">
+                    <img src="https://pbs.twimg.com/media/Gny5h48XsAAN_-J?format=jpg&name=small"
+                        alt="Web Elements Photo" class="wallpaper-thumb">
+                </a>
+                <a href="https://x.com/SaitoxBeats/status/1908604395903664330/photo/3" target="_blank"
+                    class="wallpaper-item">
+                    <img src="https://pbs.twimg.com/media/Gny5ig9XIAAi8CJ?format=jpg&name=small" alt="Wine Photo"
+                        class="wallpaper-thumb">
+                </a>
+                <a href="https://x.com/SaitoxBeats/status/1908604395903664330/photo/4" target="_blank"
+                    class="wallpaper-item">
+                    <img src="https://pbs.twimg.com/media/Gny5i92XEAAkOMd?format=jpg&name=small"
+                        alt="Stage Danger Photo" class="wallpaper-thumb">
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function sendSection(section) {
+        window.parent.postMessage({ type: 'goToSection', section }, '*');
+    }
+</script>
+<script src="wave.js"></script>
+
+<script>
+    const sections = ["3dAnims", "Games", "Wallpapers", "Photos"];
+    const hideTimeouts = {};
+
+    // Esconde todas as seções inicialmente
+    sections.forEach(id => {
+        const el = document.getElementById(id);
+        el.style.display = "none";
+        el.style.opacity = 0;
+        el.style.transform = "translateY(30px)";
+        el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+    });
+
+    // Função para mostrar a seção escolhida com animação
+    function showSection(sectionId) {
+        sections.forEach(id => {
+            const el = document.getElementById(id);
+            // Limpa timeout anterior, se existir
+            if (hideTimeouts[id]) {
+                clearTimeout(hideTimeouts[id]);
+                hideTimeouts[id] = null;
+            }
+            if (id === sectionId) {
+                el.style.display = "block";
+                // Força reflow para garantir a animação
+                void el.offsetWidth;
+                el.style.opacity = 1;
+                el.style.transform = "translateY(0)";
+            } else {
+                el.style.opacity = 0;
+                el.style.transform = "translateY(30px)";
+                hideTimeouts[id] = setTimeout(() => {
+                    el.style.display = "none";
+                }, 500); // espera a animação terminar
+            }
+        });
+    }
+
+    // Adiciona evento aos botões do projects-nav
+    document.querySelectorAll("#projects-nav .nav-button").forEach((btn, idx) => {
+        btn.addEventListener("click", () => showSection(sections[idx]));
+    });
+
+    showSection("3dAnims"); // Exibe a seção 3D Animations por padrão
+</script>

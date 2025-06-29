@@ -1,87 +1,738 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saitox</title>
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <title>S A I T O X</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
 </head>
-<link rel="stylesheet" href="css/style.css">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="css/windows.css">
-<script src="js/script.js"></script>
-
-<style>
-    html{
-        background-image: url("img/bg.png");
-    }
-</style>
 <body>
-    <main id="desktop">
-        <div class="frame" id="navbar-window">
-            <div class="topbar blue">
-                <div class="window-title">Nav.exe</div>
-                <div class="maxbtn"><span></span></div>
-                <div class="xbtn">x</div>
-            </div>
-            <div class="content">
-                <div id="navhtml">
-                    <nav>
-                        <li><a href="https://saitoxbeats.me/">Home</a></li>
-                        <li><a href="https://bytelower.itch.io/">Games</a></li>
-                        <li><a href="javascript:void(0)" onclick="openWindow('projects-window')">Projects</a></li>
-                        <li><a href="javascript:void(0)" onclick="openWindow('wallpaper-window')">Wallpapers</a></li>
-                        <li><a href="javascript:void(0)" onclick="openWindow('about-window')">about</a></li>
-                    </nav>
-                </div>
+    <canvas id="bg"></canvas>
+
+    <!-- Loading overlay -->
+    <div id="loading-overlay">
+        <div id="loading-box">
+            <div id="loading-text">Initializing 3D Scene...</div>
+            <div id="loading-bar-bg">
+                <div id="loading-bar"></div>
             </div>
         </div>
-        <div class="frame" id="hello-window">
-            <div class="topbar blue">
-                <div class="window-title">Hello.cs (Debug)</div>
-                <div class="maxbtn"><span></span></div>
-                <div class="xbtn">x</div>
-            </div>
-            <div class="content">
-                <div id="apresentation">
-                    <p>Hello! my name is</p>
-                    <h1 id="myname"><b>Saitox</b></h1>
-                </div>
-            </div>
-        </div>
-        <div class="frame" id="projects-window">
-            <div class="topbar">
-                <div class="window-title">Projects.html</div>
-                <div class="maxbtn"><span></span></div>
-                <div class="xbtn">x</div>
-            </div>
-            <div class="content">
-                <iframe src="projects.html" frameborder="0"></iframe>
-            </div>
-        </div>
-        <div class="frame" id="wallpaper-window">
-            <div class="topbar">
-                <div class="window-title">Wallpapers.html</div>
-                <div class="maxbtn"><span></span></div>
-                <div class="xbtn">x</div>
-            </div>
-            <div class="content">
-                <iframe src="wallpapers.html" frameborder="0"></iframe>
-            </div>
-        </div>
-        <div class="frame" id="about-window">
-            <div class="topbar">
-                <div class="window-title">About.txt</div>
-                <div class="maxbtn"><span></span></div>
-                <div class="xbtn">x</div>
-            </div>
-            <div class="content">
-                <iframe src="about.html" frameborder="0"></iframe>
-            </div>
-        </div>
-    </main>
+    </div>
+
+    <!-- Usando importmap para módulos ES6 -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
+            "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12.2/index.js"
+        }
+    }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { CSS3DRenderer, CSS3DObject } from 'three/addons/renderers/CSS3DRenderer.js';
+        import { gsap } from 'gsap';
+
+        // Expor globalmente para debug
+        window.THREE = THREE;
+        window.CSS3DRenderer = CSS3DRenderer;
+        window.CSS3DObject = CSS3DObject;
+        window.gsap = gsap;
+
+        console.log('Módulos carregados');
+        console.log('THREE.js versão:', THREE.REVISION);
+        console.log('GSAP disponível:', typeof gsap);
+
+        // Scene configuration
+        const scene = new THREE.Scene();
+        const fogColor = new THREE.Color("rgb(172, 17, 17)");
+        scene.background = fogColor;
+        scene.fog = new THREE.Fog(fogColor, 0, 21);
+
+        // Camera setup
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        InitializeCamera();
+
+        // Renderer setup
+        const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#bg') });
+        ConfigureRenderer();
+
+        // Lighting
+        scene.add(new THREE.AmbientLight("rgb(255, 118, 118)"));
+
+        // Variáveis globais
+        let css3DObject, css3DRenderer, lookAtTarget, pointer, raycaster;
+        let fogEnabled = true;
+        let brutalistObjects = []; // Array para armazenar objetos que se movem
+
+        // Simulate loading progress
+        function simulateLoading() {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(startSite, 500);
+                }
+                setLoadingProgress(Math.min(progress, 100));
+            }, 200);
+        }
+
+        function setLoadingProgress(percent) {
+            const roundedPercent = Math.round(percent);
+            document.getElementById('loading-bar').style.width = roundedPercent + '%';
+            document.getElementById('loading-text').textContent = `Initializing 3D Scene... ${roundedPercent}%`;
+        }
+
+        // Functions
+        function InitializeCamera() {
+            camera.position.set(50, 50, 50);
+            camera.rotation.set(-12, -12, -0.24);
+        }
+
+        function ConfigureRenderer() {
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.render(scene, camera);
+        }
+
+        function CreateCSS3DObject(src, width, height) {
+            const element = document.createElement('iframe');
+            element.src = src;
+            Object.assign(element.style, {
+                width: width + 'px',
+                height: height + 'px',
+                border: 'none',
+                backfaceVisibility: 'hidden',
+                transformStyle: 'preserve-3d'
+            });
+
+            const object = new CSS3DObject(element);
+            object.position.set(0, 3.655, 0.247);
+            object.scale.set(0.01, 0.01, 0.01);
+            return object;
+        }
+
+        function CreateCSS3DRenderer() {
+            const renderer = new CSS3DRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            Object.assign(renderer.domElement.style, {
+                position: 'absolute',
+                top: '0',
+                left: '0',
+                zIndex: '10',
+                pointerEvents: 'auto'
+            });
+            return renderer;
+        }
+
+        function OnPointerMove(event) {
+            pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+            pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            raycaster.setFromCamera(pointer, camera);
+            const intersects = raycaster.intersectObjects(scene.children);
+            css3DRenderer.domElement.style.cursor = intersects.length > 0 ? 'pointer' : 'auto';
+        }
+
+        function OnWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            css3DRenderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // Sistema de movimento e prevenção de colisão
+        function updateBrutalistMovement() {
+            brutalistObjects.forEach(obj => {
+                // Atualiza posição
+                obj.position.x += obj.userData.velocity.x;
+                obj.position.y += obj.userData.velocity.y;
+                obj.position.z += obj.userData.velocity.z;
+
+                // Atualiza rotação
+                obj.rotation.x += obj.userData.rotationSpeed.x;
+                obj.rotation.y += obj.userData.rotationSpeed.y;
+                obj.rotation.z += obj.userData.rotationSpeed.z;
+
+                // Verifica distância da câmera
+                const distanceToCamera = obj.position.distanceTo(camera.position);
+                const minDistance = 15; // Distância mínima da câmera
+
+                if (distanceToCamera < minDistance) {
+                    // Calcula vetor de afastamento da câmera
+                    const awayFromCamera = new THREE.Vector3()
+                        .subVectors(obj.position, camera.position)
+                        .normalize()
+                        .multiplyScalar(0.1);
+
+                    // Aplica força de repulsão
+                    obj.userData.velocity.add(awayFromCamera);
+                }
+
+                // Limita velocidade máxima
+                const maxSpeed = 0.05;
+                if (obj.userData.velocity.length() > maxSpeed) {
+                    obj.userData.velocity.normalize().multiplyScalar(maxSpeed);
+                }
+
+                // Limites do espaço (para não sair muito longe)
+                const bounds = { x: 200, y: 150, z: 200 };
+
+                if (Math.abs(obj.position.x) > bounds.x) {
+                    obj.userData.velocity.x *= -0.5;
+                    obj.position.x = Math.sign(obj.position.x) * bounds.x;
+                }
+                if (Math.abs(obj.position.y) > bounds.y) {
+                    obj.userData.velocity.y *= -0.5;
+                    obj.position.y = Math.sign(obj.position.y) * bounds.y;
+                }
+                if (Math.abs(obj.position.z) > bounds.z) {
+                    obj.userData.velocity.z *= -0.5;
+                    obj.position.z = Math.sign(obj.position.z) * bounds.z;
+                }
+
+                // Adiciona um pouco de aleatoriedade ocasional
+                if (Math.random() < 0.001) {
+                    obj.userData.velocity.add(new THREE.Vector3(
+                        (Math.random() - 0.5) * 0.02,
+                        (Math.random() - 0.5) * 0.02,
+                        (Math.random() - 0.5) * 0.02
+                    ));
+                }
+            });
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Atualiza movimento dos objetos brutais
+            updateBrutalistMovement();
+
+            if (css3DObject && css3DRenderer) {
+                const cameraToObject = new THREE.Vector3().subVectors(css3DObject.position, camera.position).normalize();
+                const objectForward = new THREE.Vector3(0, 0, -1).applyQuaternion(css3DObject.quaternion);
+                const dot = cameraToObject.dot(objectForward);
+                css3DObject.element.style.visibility = dot > 0 ? 'visible' : 'hidden';
+
+                if (lookAtTarget) {
+                    camera.lookAt(lookAtTarget);
+                }
+                css3DRenderer.render(scene, camera);
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // Camera positions
+        const cameraPositions = {
+            home: {
+                x: -0.080, y: 0.680, z: 5,
+                css3d: {
+                    pos: [0, 3.655, 0],
+                    rotY: 0,
+                    width: 960,
+                    height: 720,
+                    src: 'Main.html'
+                }
+            },
+            projects: {
+                x: 20.000, y: 18.000, z: 8,
+                css3d: {
+                    pos: [25.000, 15.000, 0],
+                    rotY: 0,
+                    width: 1280,
+                    height: 800,
+                    src: 'Projects.html'
+                }
+            },
+            about: {
+                x: 42.000, y: 1, z: 8,
+                css3d: {
+                    pos: [39.000, 1, 0],
+                    rotY: 0,
+                    width: 800,
+                    height: 800,
+                    src: 'About.html'
+                }
+            }
+        };
+
+        function GoToSection(section) {
+            console.log(`Navigating to section: ${section}`);
+            const target = cameraPositions[section];
+            if (!target || !css3DObject) return;
+
+            const { pos, rotY, width, height, src } = target.css3d;
+
+            if (lookAtTarget) {
+                gsap.to(lookAtTarget, {
+                    duration: 3,
+                    ease: 'power2.inOut',
+                    x: pos[0], y: pos[1], z: pos[2]
+                });
+            }
+
+            css3DObject.position.set(...pos);
+            css3DObject.rotation.y = rotY;
+            css3DObject.element.style.width = width + 'px';
+            css3DObject.element.style.height = height + 'px';
+            if (src) css3DObject.element.src = src;
+
+            gsap.to(camera.position, {
+                duration: 4,
+                ease: 'power2.inOut',
+                x: target.x, y: target.y, z: target.z
+            });
+        }
+
+        // Função para adicionar objeto ao sistema de movimento
+        function addMovingObject(mesh, baseVelocity = 0.002) {
+            mesh.userData = {
+                velocity: new THREE.Vector3(
+                    (Math.random() - 0.5) * baseVelocity,
+                    (Math.random() - 0.5) * baseVelocity,
+                    (Math.random() - 0.5) * baseVelocity
+                ),
+                rotationSpeed: new THREE.Vector3(
+                    (Math.random() - 0.5) * 0.01,
+                    (Math.random() - 0.5) * 0.01,
+                    (Math.random() - 0.5) * 0.01
+                )
+            };
+            brutalistObjects.push(mesh);
+        }
+
+        // Construção Brutalista EXTREMAMENTE Complexa e Trippy - AGORA COM MOVIMENTO
+        function createBrutalistStructure() {
+            const brutalistGroup = new THREE.Group();
+
+            // Material preto uniforme para todos os objetos
+            const blackMaterial = new THREE.MeshBasicMaterial({
+                color: 0x000000,
+                transparent: true,
+                opacity: 0.9
+            });
+
+            // === ESTRUTURAS PRINCIPAIS MASSIVAS ===
+
+            // Mega base principal - plataforma gigante
+            const megaBase = new THREE.BoxGeometry(120, 12, 80);
+            const megaBaseMesh = new THREE.Mesh(megaBase, blackMaterial);
+            megaBaseMesh.position.set(-20, -15, -35);
+            brutalistGroup.add(megaBaseMesh);
+            addMovingObject(megaBaseMesh, 0.001);
+
+            // Torres principais - múltiplas alturas
+            const towers = [
+                { size: [15, 60, 15], pos: [-25, 15, -30] },
+                { size: [12, 75, 12], pos: [-10, 22, -25] },
+                { size: [18, 45, 18], pos: [-40, 7, -20] },
+                { size: [10, 85, 10], pos: [-5, 27, -40] },
+                { size: [20, 35, 14], pos: [-55, 2, -35] },
+                { size: [8, 95, 8], pos: [5, 33, -28] },
+                { size: [25, 25, 25], pos: [-70, -2, -45] }
+            ];
+
+            towers.forEach(tower => {
+                const geometry = new THREE.BoxGeometry(...tower.size);
+                const mesh = new THREE.Mesh(geometry, blackMaterial);
+                mesh.position.set(...tower.pos);
+                brutalistGroup.add(mesh);
+                addMovingObject(mesh, 0.0015);
+            });
+
+            // === PONTES E CONEXÕES COMPLEXAS ===
+
+            // Sistema massivo de pontes interconectadas
+            const bridges = [
+                { size: [30, 4, 6], pos: [-20, 25, -25], rot: [0, 0, 0] },
+                { size: [25, 3, 4], pos: [-15, 35, -30], rot: [0, Math.PI / 6, 0] },
+                { size: [20, 5, 8], pos: [-30, 20, -35], rot: [0, -Math.PI / 4, 0] },
+                { size: [35, 3, 5], pos: [-25, 40, -28], rot: [0, Math.PI / 8, Math.PI / 12] },
+                { size: [15, 2, 3], pos: [-40, 30, -25], rot: [Math.PI / 15, Math.PI / 3, 0] },
+                { size: [28, 6, 7], pos: [-18, 50, -32], rot: [0, -Math.PI / 5, 0] },
+                { size: [22, 4, 5], pos: [-35, 45, -40], rot: [Math.PI / 20, 0, Math.PI / 10] }
+            ];
+
+            bridges.forEach(bridge => {
+                const geometry = new THREE.BoxGeometry(...bridge.size);
+                const mesh = new THREE.Mesh(geometry, blackMaterial);
+                mesh.position.set(...bridge.pos);
+                mesh.rotation.set(...bridge.rot);
+                brutalistGroup.add(mesh);
+                addMovingObject(mesh, 0.002);
+            });
+
+            // === ELEMENTOS EM CANTILEVER EXTREMAMENTE COMPLEXOS ===
+
+            // Cantilevers massivos e angulares
+            for (let i = 0; i < 15; i++) {
+                const cantilever = new THREE.BoxGeometry(
+                    15 + Math.random() * 20,
+                    3 + Math.random() * 8,
+                    6 + Math.random() * 10
+                );
+                const mesh = new THREE.Mesh(cantilever, blackMaterial);
+                mesh.position.set(
+                    -60 + i * 8,
+                    15 + Math.random() * 30,
+                    -20 + Math.random() * -25
+                );
+                mesh.rotation.set(
+                    Math.random() * Math.PI / 4,
+                    Math.random() * Math.PI / 2,
+                    Math.random() * Math.PI / 6
+                );
+                brutalistGroup.add(mesh);
+                addMovingObject(mesh, 0.0025);
+            }
+
+            // === ESTRUTURAS ANGULARES E ROTACIONADAS ===
+
+            // Elementos diagonais complexos
+            for (let i = 0; i < 25; i++) {
+                const angular = new THREE.BoxGeometry(
+                    5 + Math.random() * 15,
+                    10 + Math.random() * 25,
+                    4 + Math.random() * 8
+                );
+                const mesh = new THREE.Mesh(angular, blackMaterial);
+                mesh.position.set(
+                    -80 + i * 6,
+                    5 + Math.random() * 40,
+                    -15 + Math.random() * -30
+                );
+                mesh.rotation.set(
+                    Math.PI / 8 + Math.random() * Math.PI / 4,
+                    Math.random() * Math.PI,
+                    Math.PI / 12 + Math.random() * Math.PI / 6
+                );
+                brutalistGroup.add(mesh);
+                addMovingObject(mesh, 0.003);
+            }
+
+            // === SISTEMA MASSIVO DE PILARES ===
+
+            // Pilares cilíndricos de múltiplos tipos
+            for (let i = 0; i < 40; i++) {
+                const pillar = new THREE.CylinderGeometry(
+                    0.5 + Math.random() * 2,
+                    1 + Math.random() * 3,
+                    8 + Math.random() * 20,
+                    6 + Math.floor(Math.random() * 6)
+                );
+                const mesh = new THREE.Mesh(pillar, blackMaterial);
+                mesh.position.set(
+                    -90 + i * 4,
+                    0 + Math.random() * 15,
+                    -50 + Math.random() * 20
+                );
+                brutalistGroup.add(mesh);
+                addMovingObject(mesh, 0.0035);
+            }
+
+            // Pilares retangulares
+            for (let i = 0; i < 30; i++) {
+                const pillar = new THREE.BoxGeometry(
+                    1 + Math.random() * 3,
+                    10 + Math.random() * 30,
+                    1 + Math.random() * 3
+                );
+                const mesh = new THREE.Mesh(pillar, blackMaterial);
+                mesh.position.set(
+                    -85 + i * 5,
+                    0,
+                    -45 + Math.random() * 15
+                );
+                brutalistGroup.add(mesh);
+                addMovingObject(mesh, 0.0025);
+            }
+
+            // === ELEMENTOS DECORATIVOS MICRO-DETALHADOS ===
+
+            // Blocos de relevo em padrões complexos
+            for (let x = 0; x < 20; x++) {
+                for (let y = 0; y < 15; y++) {
+                    for (let z = 0; z < 3; z++) {
+                        if (Math.random() > 0.3) { // Densidade de 70%
+                            const relief = new THREE.BoxGeometry(
+                                0.5 + Math.random() * 2,
+                                0.5 + Math.random() * 2,
+                                0.2 + Math.random() * 0.8
+                            );
+                            const mesh = new THREE.Mesh(relief, blackMaterial);
+                            mesh.position.set(
+                                -60 + x * 2,
+                                -5 + y * 2,
+                                -15 + z * 0.5
+                            );
+                            mesh.rotation.set(
+                                Math.random() * Math.PI / 8,
+                                Math.random() * Math.PI / 4,
+                                Math.random() * Math.PI / 8
+                            );
+                            brutalistGroup.add(mesh);
+                            addMovingObject(mesh, 0.004);
+                        }
+                    }
+                }
+            }
+
+            // === SISTEMA COMPLEXO DE ESCADAS ===
+
+            // Múltiplas escadarias em diferentes ângulos
+            const staircases = [
+                { steps: 20, pos: [-30, -10, -10], stepSize: [18, 0.6, 2.5], direction: [0, 1, 0.4] },
+                { steps: 15, pos: [-50, -8, -20], stepSize: [12, 0.8, 3], direction: [0.3, 1, 0.2] },
+                { steps: 25, pos: [-20, -12, -35], stepSize: [20, 0.5, 2], direction: [-0.2, 1, 0.3] },
+                { steps: 18, pos: [-70, -6, -30], stepSize: [15, 0.7, 2.8], direction: [0.4, 1, -0.1] }
+            ];
+
+            staircases.forEach(staircase => {
+                for (let i = 0; i < staircase.steps; i++) {
+                    const step = new THREE.BoxGeometry(...staircase.stepSize);
+                    const mesh = new THREE.Mesh(step, blackMaterial);
+                    mesh.position.set(
+                        staircase.pos[0] + i * staircase.direction[0],
+                        staircase.pos[1] + i * staircase.direction[1],
+                        staircase.pos[2] + i * staircase.direction[2]
+                    );
+                    brutalistGroup.add(mesh);
+                    addMovingObject(mesh, 0.0015);
+                }
+            });
+
+            // === SISTEMA MASSIVO DE JANELAS E ABERTURAS ===
+
+            // Janelas em padrões complexos nas torres
+            towers.forEach((tower, towerIndex) => {
+                const windowRows = Math.floor(tower.size[1] / 4);
+                const windowCols = Math.floor(tower.size[0] / 3);
+
+                for (let row = 0; row < windowRows; row++) {
+                    for (let col = 0; col < windowCols; col++) {
+                        if (Math.random() > 0.2) { // 80% das janelas
+                            const window = new THREE.BoxGeometry(
+                                1.5 + Math.random() * 2,
+                                2 + Math.random() * 1.5,
+                                0.3
+                            );
+                            const mesh = new THREE.Mesh(window, blackMaterial);
+                            mesh.position.set(
+                                tower.pos[0] - tower.size[0] / 2 + col * 3 + 1.5,
+                                tower.pos[1] - tower.size[1] / 2 + row * 4 + 2,
+                                tower.pos[2] + tower.size[2] / 2 + 0.2
+                            );
+                            brutalistGroup.add(mesh);
+                            addMovingObject(mesh, 0.005);
+                        }
+                    }
+                }
+            });
+
+            // === ELEMENTOS TÉCNICOS E INDUSTRIAIS ===
+
+            // Dutos e tubulações complexas
+            for (let i = 0; i < 50; i++) {
+                const pipe = new THREE.CylinderGeometry(
+                    0.2 + Math.random() * 0.8,
+                    0.2 + Math.random() * 0.8,
+                    5 + Math.random() * 20,
+                    8
+                );
+                const mesh = new THREE.Mesh(pipe, blackMaterial);
+                mesh.position.set(
+                    -90 + Math.random() * 100,
+                    10 + Math.random() * 40,
+                    -50 + Math.random() * 30
+                );
+                mesh.rotation.set(
+                    Math.random() * Math.PI,
+                    Math.random() * Math.PI,
+                    Math.random() * Math.PI
+                );
+                brutalistGroup.add(mesh);
+                addMovingObject(mesh, 0.003);
+            }
+
+            // Antenas e estruturas no topo
+            for (let i = 0; i < 20; i++) {
+                const antenna = new THREE.CylinderGeometry(0.1, 0.3, 8 + Math.random() * 15, 6);
+                const mesh = new THREE.Mesh(antenna, blackMaterial);
+                mesh.position.set(
+                    -60 + Math.random() * 80,
+                    50 + Math.random() * 30,
+                    -50 + Math.random() * 30
+                );
+                brutalistGroup.add(mesh);
+                addMovingObject(mesh, 0.0045);
+            }
+
+            // === ESTRUTURAS DE COBERTURA ULTRA-COMPLEXAS ===
+
+            // Múltiplas coberturas em níveis diferentes
+            const roofs = [
+                { size: [40, 3, 25], pos: [-25, 65, -30], rot: [0, Math.PI / 12, 0] },
+                { size: [30, 4, 20], pos: [-15, 70, -25], rot: [Math.PI / 20, -Math.PI / 8, 0] },
+                { size: [50, 2, 35], pos: [-35, 55, -35], rot: [0, Math.PI / 6, Math.PI / 15] },
+                { size: [25, 5, 15], pos: [-45, 75, -20], rot: [Math.PI / 10, Math.PI / 4, 0] }
+            ];
+
+            roofs.forEach(roof => {
+                const geometry = new THREE.BoxGeometry(...roof.size);
+                const mesh = new THREE.Mesh(geometry, blackMaterial);
+                mesh.position.set(...roof.pos);
+                mesh.rotation.set(...roof.rot);
+                brutalistGroup.add(mesh);
+                addMovingObject(mesh, 0.001);
+            });
+
+            // === ELEMENTOS FRACTAIS E REPETITIVOS ===
+
+            // Estruturas fractais pequenas
+            for (let level = 0; level < 4; level++) {
+                const scale = 1 / Math.pow(2, level);
+                const count = Math.pow(3, level + 1);
+
+                for (let i = 0; i < count; i++) {
+                    const fractal = new THREE.BoxGeometry(
+                        2 * scale,
+                        2 * scale,
+                        2 * scale
+                    );
+                    const mesh = new THREE.Mesh(fractal, blackMaterial);
+                    mesh.position.set(
+                        -80 + (i * 3) * scale,
+                        80 + level * 5,
+                        -60 + Math.sin(i) * 10 * scale
+                    );
+                    mesh.rotation.set(
+                        i * Math.PI / 4,
+                        i * Math.PI / 6,
+                        i * Math.PI / 8
+                    );
+                    brutalistGroup.add(mesh);
+                    addMovingObject(mesh, 0.005);
+                }
+            }
+
+            // === ELEMENTOS ORGÂNICOS BRUTAIS ===
+
+            // Formas orgânicas brutalizadas
+            for (let i = 0; i < 30; i++) {
+                const organic = new THREE.SphereGeometry(
+                    1 + Math.random() * 4,
+                    8 + Math.floor(Math.random() * 8),
+                    6 + Math.floor(Math.random() * 6)
+                );
+                const mesh = new THREE.Mesh(organic, blackMaterial);
+                mesh.position.set(
+                    -100 + Math.random() * 120,
+                    -10 + Math.random() * 100,
+                    -60 + Math.random() * 40
+                );
+                mesh.scale.set(
+                    0.5 + Math.random() * 1.5,
+                    0.3 + Math.random() * 2,
+                    0.7 + Math.random() * 1.3
+                );
+                brutalistGroup.add(mesh);
+                addMovingObject(mesh, 0.0035);
+            }
+
+            // === DETALHES MICROSCÓPICOS ===
+
+            // Elementos minúsculos para textura visual
+            for (let i = 0; i < 200; i++) {
+                const micro = new THREE.BoxGeometry(
+                    0.1 + Math.random() * 0.5,
+                    0.1 + Math.random() * 0.5,
+                    0.1 + Math.random() * 0.3
+                );
+                const mesh = new THREE.Mesh(micro, blackMaterial);
+                mesh.position.set(
+                    -100 + Math.random() * 140,
+                    -15 + Math.random() * 120,
+                    -65 + Math.random() * 50
+                );
+                mesh.rotation.set(
+                    Math.random() * Math.PI,
+                    Math.random() * Math.PI,
+                    Math.random() * Math.PI
+                );
+                brutalistGroup.add(mesh);
+                addMovingObject(mesh, 0.006);
+            }
+
+            // Posiciona todo o complexo
+            brutalistGroup.position.set(15.000, 0, 20);
+            scene.add(brutalistGroup);
+            console.log('Estrutura brutalista ULTRA-COMPLEXA criada com', brutalistGroup.children.length, 'elementos');
+            console.log('Objetos em movimento:', brutalistObjects.length);
+        }
+
+        // Inicialização
+        function startSite() {
+            // Inicializa variáveis globais
+            css3DObject = CreateCSS3DObject('main.html', 960, 720);
+            scene.add(css3DObject);
+
+            css3DRenderer = CreateCSS3DRenderer();
+            document.body.appendChild(css3DRenderer.domElement);
+
+            pointer = new THREE.Vector2();
+            raycaster = new THREE.Raycaster();
+
+            css3DRenderer.domElement.addEventListener('pointermove', OnPointerMove);
+            css3DObject.element.addEventListener('click', () => {
+                console.log('CSS3D iframe clicked');
+            });
+            renderer.domElement.style.pointerEvents = 'none';
+
+            lookAtTarget = new THREE.Vector3(css3DObject.position.x, css3DObject.position.y, css3DObject.position.z);
+
+            // Cria a estrutura brutalista ultra-complexa
+            createBrutalistStructure();
+
+            // Expor funções globalmente
+            window.goToSection = GoToSection;
+            window.addEventListener('resize', OnWindowResize);
+
+            // Remove loading overlay
+            document.getElementById('loading-overlay').style.display = 'none';
+
+            // Câmera começa afastada
+            camera.position.set(50, 50, 50);
+            camera.rotation.set(-12, -12, -0.24);
+
+            // Anima para o menu/home
+            setTimeout(() => {
+                GoToSection('home');
+            }, 1000);
+
+            animate();
+            console.log('Site iniciado com sucesso');
+        }
+        // Inicia simulação de loading
+        simulateLoading();
+
+        // Listener para mensagens do iframe (main.html)
+        window.addEventListener('message', function (event) {
+            if (event && event.data && event.data.type === 'goToSection') {
+                if (typeof window.goToSection === 'function') {
+                    window.goToSection(event.data.section);
+                }
+            }
+        });
+
+        console.log('Setup completo - aguardando carregamento...');
+    </script>
 </body>
+
 </html>
