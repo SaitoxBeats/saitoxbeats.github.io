@@ -44,10 +44,6 @@
         window.CSS3DObject = CSS3DObject;
         window.gsap = gsap;
 
-        console.log('Módulos carregados');
-        console.log('THREE.js versão:', THREE.REVISION);
-        console.log('GSAP disponível:', typeof gsap);
-
         // Scene configuration
         const scene = new THREE.Scene();
         const fogColor = new THREE.Color("rgb(172, 17, 17)");
@@ -286,7 +282,7 @@
 
             gsap.to(camera.position, {
                 duration: 4,
-                ease: 'power2.inOut',
+                ease: 'power2.Out',
                 x: target.x, y: target.y, z: target.z
             });
         }
@@ -484,7 +480,7 @@
                 }
             }
 
-            // === SISTEMA COMPLEXO DE ESCADAS ===
+            // === ESCADAS ===
 
             // Múltiplas escadarias em diferentes ângulos
             const staircases = [
@@ -508,7 +504,7 @@
                 }
             });
 
-            // === SISTEMA MASSIVO DE JANELAS E ABERTURAS ===
+            // === JANELAS E ABERTURAS ===
 
             // Janelas em padrões complexos nas torres
             towers.forEach((tower, towerIndex) => {
@@ -536,9 +532,9 @@
                 }
             });
 
-            // === ELEMENTOS TÉCNICOS E INDUSTRIAIS ===
+            // === ELEMENTOS TÉCNICOS ===
 
-            // Dutos e tubulações complexas
+            // Dutos e tubulações
             for (let i = 0; i < 50; i++) {
                 const pipe = new THREE.CylinderGeometry(
                     0.2 + Math.random() * 0.8,
@@ -574,7 +570,7 @@
                 addMovingObject(mesh, 0.0045);
             }
 
-            // === ESTRUTURAS DE COBERTURA ULTRA-COMPLEXAS ===
+            // === ESTRUTURAS DE COBERTURA ===
 
             // Múltiplas coberturas em níveis diferentes
             const roofs = [
@@ -622,9 +618,9 @@
                 }
             }
 
-            // === ELEMENTOS ORGÂNICOS BRUTAIS ===
+            // === ELEMENTOS ORGÂNICOS ===
 
-            // Formas orgânicas brutalizadas
+            // Formas orgânicas
             for (let i = 0; i < 30; i++) {
                 const organic = new THREE.SphereGeometry(
                     1 + Math.random() * 4,
@@ -646,7 +642,7 @@
                 addMovingObject(mesh, 0.0035);
             }
 
-            // === DETALHES MICROSCÓPICOS ===
+            // === DETALHES ===
 
             // Elementos minúsculos para textura visual
             for (let i = 0; i < 200; i++) {
@@ -673,8 +669,6 @@
             // Posiciona todo o complexo
             brutalistGroup.position.set(15.000, 0, 20);
             scene.add(brutalistGroup);
-            console.log('Estrutura brutalista ULTRA-COMPLEXA criada com', brutalistGroup.children.length, 'elementos');
-            console.log('Objetos em movimento:', brutalistObjects.length);
         }
 
         // Inicialização
@@ -697,7 +691,7 @@
 
             lookAtTarget = new THREE.Vector3(css3DObject.position.x, css3DObject.position.y, css3DObject.position.z);
 
-            // Cria a estrutura brutalista ultra-complexa
+            // Cria a estrutura
             createBrutalistStructure();
 
             // Expor funções globalmente
@@ -717,7 +711,7 @@
             }, 1000);
 
             animate();
-            console.log('Site iniciado com sucesso');
+            console.log('started');
         }
         // Inicia simulação de loading
         simulateLoading();

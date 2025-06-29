@@ -1,16 +1,6 @@
 <link rel="stylesheet" href="pStyles.css">
 
-<!-- bg -->
-<div id="bg-img">
-    <svg id="bg-wave" viewBox="0 0 1920 1080" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
-        style="position:absolute;top:0;left:0;width:100vw;height:100vh;z-index:-1;">
-        <filter id="wave">
-            <feTurbulence id="turb" baseFrequency="0.003 0.004" numOctaves="2" seed="2" type="turbulence" />
-            <feDisplacementMap in2="turb" in="SourceGraphic" scale="160" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-        <image x="0" y="0" width="1920" height="1080" xlink:href="assets/img/bgFront.png" style="filter:url(#wave);" />
-    </svg>
-</div>
+<div id="bg-img"></div>
 
 <body>
     <h1 id="main-title"><strong>Projects</strong></h1>
@@ -86,6 +76,23 @@
                 <p id="about">Here you can find my wallpapers, free to download and use</p>
             </div>
             <div class="wallpaper-grid">
+                <!-- update - 06/29/2025 -->
+                <a href="assets/Wallpapers/Useless.png" target="_blank"
+                    class="wallpaper-item">
+                    <img src="assets/Wallpapers/Useless_Reduce.jpg" alt="Bride"
+                        class="wallpaper-thumb">
+                </a>
+                <a href="assets/Wallpapers/I didn't even want to be here.jpg" target="_blank"
+                    class="wallpaper-item">
+                    <img src="assets/Wallpapers/I didn't even want to be here_Reduce.jpg" alt="Bride"
+                        class="wallpaper-thumb">
+                </a>
+                <a href="assets/Wallpapers/Glass.jpg" target="_blank"
+                    class="wallpaper-item">
+                    <img src="assets/Wallpapers/Glass_Reduce.jpg" alt="Bride"
+                        class="wallpaper-thumb">
+                </a>
+                <!-- mais antigos -->
                 <a href="https://pbs.twimg.com/media/Gj4izcNWkAAGk4t?format=jpg&name=large" target="_blank"
                     class="wallpaper-item">
                     <img src="https://pbs.twimg.com/media/Gj4izcNWkAAGk4t?format=jpg&name=large" alt="Bride"
@@ -168,7 +175,6 @@
         window.parent.postMessage({ type: 'goToSection', section }, '*');
     }
 </script>
-<script src="wave.js"></script>
 
 <script>
     const sections = ["3dAnims", "Games", "Wallpapers", "Photos"];
