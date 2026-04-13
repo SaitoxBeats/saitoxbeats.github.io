@@ -10,6 +10,14 @@
 </head>
 
 <body>
+    <svg style="position:absolute;width:0;height:0">
+        <defs>
+            <filter id="wave-filter" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+                <feTurbulence id="turb" type="turbulence" baseFrequency="0.003 0.004" numOctaves="2" seed="2" result="turb"/>
+                <feDisplacementMap in="SourceGraphic" in2="turb" scale="18" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+        </defs>
+    </svg>
     <div id="bg-img"></div>
     <h1 id="main-title"><strong>Projects</strong></h1>
     <nav>
@@ -48,8 +56,10 @@
                 <p id="about">Here you can find my 3D animations, created using Blender and Maya</p>
                 <div id="anims-container">
                     <p id="about">Animation Reel 2025 (Saitox)</p>
-                    <iframe id="animsFrame" width="420" height="225"
-                        src="https://www.youtube.com/embed/1stSiUTBbIE"></iframe>
+                    <video id="animsFrame" width="420" height="225" controls>
+                        <source src="assets/img/anim.mp4" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
                 </div>
             </div>
         </div>
@@ -202,6 +212,7 @@
             </div>
         </div>
     </div>
+    <script src="wave.js"></script>
 </body>
 
 <script>
