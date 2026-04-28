@@ -1,34 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S A I T O X</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAITOX</title>
+<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <svg style="position:absolute;width:0;height:0">
-        <defs>
-            <filter id="wave-filter" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
-                <feTurbulence id="turb" type="turbulence" baseFrequency="0.003 0.004" numOctaves="2" seed="2" result="turb"/>
-                <feDisplacementMap in="SourceGraphic" in2="turb" scale="18" xChannelSelector="R" yChannelSelector="G"/>
-            </filter>
-        </defs>
-    </svg>
-    <div id="bg-img"></div>
-    <p id="intro">Hello my name is</p>
-    <h1 id="main-title"><strong>Saitox</strong></h1>
-    <nav>
-        <ul>
-            <li><a class="nav-button active" href="index.html">Home</a></li>
-            <li><a class="nav-button" href="projects.html">Projects</a></li>
-            <li><a class="nav-button" href="about.html">About</a></li>
-        </ul>
-    </nav>
-    <script src="wave.js"></script>
-</body>
 
+<!-- Shared flying layer -->
+<div id="shared-layer">
+  <div id="fly-title" style="display:none"></div>
+</div>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <div id="home-title">
+    <img class="title-logo" src="assets/img/logo.png" alt="SAITOX logo">
+    <span>SAITOX</span>
+  </div>
+  <nav id="home-nav">
+    <span class="home-nav-item" data-target="home">Home</span>
+    <span class="home-nav-item" data-target="projects">Projects</span>
+    <span class="home-nav-item" data-target="about">About</span>
+  </nav>
+</div>
+
+<!-- INNER PAGES (Projects / About share this shell) -->
+<div class="page" id="page-inner">
+  <div id="inner-header">
+    <div id="inner-title">
+      <img class="title-logo" src="assets/img/logo.png" alt="SAITOX logo">
+      <span>SAITOX</span>
+    </div>
+    <nav id="inner-nav">
+      <span class="inner-nav-item" data-target="home">Home</span>
+      <span class="inner-nav-item" data-target="projects">Projects</span>
+      <span class="inner-nav-item" data-target="about">About</span>
+    </nav>
+  </div>
+  <div id="inner-rule"></div>
+  <div id="inner-body">
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <!-- Projects categories -->
+      <div id="sidebar-projects">
+        <span class="cat-item active" data-cat="3d">3d animations</span>
+        <span class="cat-item" data-cat="webtools">Webtools</span>
+        <span class="cat-item" data-cat="games">Games</span>
+        <span class="cat-item" data-cat="arts">Arts</span>
+      </div>
+      <!-- About categories -->
+      <div id="sidebar-about" style="display:none">
+        <span class="cat-item active" data-about="me">About me</span>
+        <span class="cat-item" data-about="contacts">Contacts</span>
+        <span class="cat-item" data-about="links">Links</span>
+      </div>
+    </div>
+    <!-- Content -->
+    <div id="content-area">
+      <!-- 3d animations -->
+      <div class="content-panel visible" data-panel="3d">
+        <div class="img-grid">
+          <div class="video-card">
+            <video class="img-cell" controls preload="metadata">
+              <source src="assets/videos/FPSGun_new.mp4" type="video/mp4">
+            </video>
+            <label class="loop-toggle">
+              <input type="checkbox" class="loop-checkbox">
+              <span>Loop</span>
+            </label>
+          </div>
+          <div class="video-card">
+            <video class="img-cell" controls preload="metadata">
+              <source src="assets/videos/FPSGun2_new.mp4" type="video/mp4">
+            </video>
+            <label class="loop-toggle">
+              <input type="checkbox" class="loop-checkbox">
+              <span>Loop</span>
+            </label>
+          </div>
+          <div class="video-card">
+            <video class="img-cell" controls preload="metadata">
+              <source src="assets/videos/AnimationReel_2025.mp4" type="video/mp4">
+            </video>
+            <label class="loop-toggle">
+              <input type="checkbox" class="loop-checkbox">
+              <span>Loop</span>
+            </label>
+          </div>
+          <div class="video-card">
+            <video class="img-cell" controls preload="metadata">
+              <source src="assets/videos/FpsAssalt_old.mp4" type="video/mp4">
+            </video>
+            <label class="loop-toggle">
+              <input type="checkbox" class="loop-checkbox">
+              <span>Loop</span>
+            </label>
+          </div>
+          <div class="video-card">
+            <video class="img-cell" controls preload="metadata">
+              <source src="assets/videos/FpsAssalt2_old.mp4" type="video/mp4">
+            </video>
+            <label class="loop-toggle">
+              <input type="checkbox" class="loop-checkbox">
+              <span>Loop</span>
+            </label>
+          </div>
+          <div class="video-card">
+            <video class="img-cell" controls preload="metadata">
+              <source src="assets/videos/BirdFlyingCycle_old.mp4" type="video/mp4">
+            </video>
+            <label class="loop-toggle">
+              <input type="checkbox" class="loop-checkbox">
+              <span>Loop</span>
+            </label>
+          </div>
+          <div class="video-card">
+            <video class="img-cell" controls preload="metadata">
+              <source src="assets/videos/UneedProblems_old.mp4" type="video/mp4">
+            </video>
+            <label class="loop-toggle">
+              <input type="checkbox" class="loop-checkbox">
+              <span>Loop</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- Webtools -->
+      <div class="content-panel" data-panel="webtools">
+        <div class="panel-copy">
+          <p>Here you can find my webTools and applications</p>
+        </div>
+        <div class="tool-list">
+          <a class="tool-item" href="https://saitoxbeats.github.io/AFXWalls/about.html" target="_blank" rel="noopener">
+            <span>AFXWalls</span>
+            <span class="tool-date">09/17/2025</span>
+          </a>
+          <a class="tool-item" href="https://saitoxbeats.github.io/BeatDeat/" target="_blank" rel="noopener">
+            <span>Beat Deat!!</span>
+            <span class="tool-date">08/07/2025</span>
+          </a>
+        </div>
+      </div>
+      <!-- Games -->
+      <div class="content-panel" data-panel="games">
+        <div class="panel-copy">
+          <p>Here you can find my games and interactive projects</p>
+        </div>
+        <div class="tool-list">
+          <a class="tool-item" href="https://bytelower.itch.io/voxel-paradox" target="_blank" rel="noopener">
+            <span>VOXEL PARADOX</span>
+            <span class="tool-date">21/04/2026</span>
+          </a>
+          <a class="tool-item" href="https://bytelower.itch.io/ure-lost-project" target="_blank" rel="noopener">
+            <span>Unidentified radiological entity</span>
+            <span class="tool-date">17/04/2026</span>
+          </a>
+          <a class="tool-item" href="https://bytelower.itch.io/god-is-silent" target="_blank" rel="noopener">
+            <span>GOD IS SILENT</span>
+            <span class="tool-date">03/12/2025</span>
+          </a>
+          <a class="tool-item" href="https://bytelower.itch.io/cpu-roulette" target="_blank" rel="noopener">
+            <span>CPURoulette</span>
+            <span class="tool-date">01/07/2025</span>
+          </a>
+          <a class="tool-item" href="https://bytelower.itch.io/scopophobia" target="_blank" rel="noopener">
+            <span>Scopophobia</span>
+            <span class="tool-date">08/04/2024</span>
+          </a>
+        </div>
+      </div>
+      <!-- Arts -->
+      <div class="content-panel" data-panel="arts">
+        <div class="img-grid">
+          <a class="img-cell" href="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreia35vgt2mo3jrq2uinkeh7ixiczpalul3wqom25lcp5524wg7ouqy" target="_blank" rel="noopener">
+            <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreia35vgt2mo3jrq2uinkeh7ixiczpalul3wqom25lcp5524wg7ouqy" alt="Backrooms 1" loading="lazy">
+          </a>
+          <a class="img-cell" href="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreigjtrqghirkf4rnzvckgu6tfhcfd46n2bfh5h6nf5leorj7qoas7m" target="_blank" rel="noopener">
+            <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreigjtrqghirkf4rnzvckgu6tfhcfd46n2bfh5h6nf5leorj7qoas7m" alt="Backrooms 2" loading="lazy">
+          </a>
+          <a class="img-cell" href="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreicr24esjjl2xdz4umvw4htpv6xqpdymxtgczpmxiic3yawiszrwnu" target="_blank" rel="noopener">
+            <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreicr24esjjl2xdz4umvw4htpv6xqpdymxtgczpmxiic3yawiszrwnu" alt="Backrooms 3" loading="lazy">
+          </a>
+          <a class="img-cell" href="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreihbg5lvjthsma2jbhxehttyjkee5usmfqacspvfncqrx4tqk2lqqq" target="_blank" rel="noopener">
+            <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreihbg5lvjthsma2jbhxehttyjkee5usmfqacspvfncqrx4tqk2lqqq" alt="Backrooms 4" loading="lazy">
+          </a>
+          <a class="img-cell" href="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreibdprsw6axuitsdluhftwwxewzuwbuq2tlqirx5xuwhrhaegzkmky" target="_blank" rel="noopener">
+            <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreibdprsw6axuitsdluhftwwxewzuwbuq2tlqirx5xuwhrhaegzkmky" alt="Backrooms 5" loading="lazy">
+          </a>
+          <a class="img-cell" href="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreigx345zvrvjznjzeakco6mxrniw6yeuykt5at7h5qc4jdp3r433ni" target="_blank" rel="noopener">
+            <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreigx345zvrvjznjzeakco6mxrniw6yeuykt5at7h5qc4jdp3r433ni" alt="Backrooms 6" loading="lazy">
+          </a>
+          <a class="img-cell" href="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreifl5g4xjhczs5hfzv5qennqhzhdr2c2m3cjhvpnulflczpiu5wkuu" target="_blank" rel="noopener">
+            <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreifl5g4xjhczs5hfzv5qennqhzhdr2c2m3cjhvpnulflczpiu5wkuu" alt="Backrooms 7" loading="lazy">
+          </a>
+          <a class="img-cell" href="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreici4rvs3equrdsokfldbzqtufhbfw4q626ig3n3exqz7iybfeapru" target="_blank" rel="noopener">
+            <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreici4rvs3equrdsokfldbzqtufhbfw4q626ig3n3exqz7iybfeapru" alt="Backrooms 9" loading="lazy">
+          </a>
+          <a class="img-cell" href="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreieyux3txgbvy5xvusemspi7ntu2rcdaovvgyvemrwwg4s73smgzy4" target="_blank" rel="noopener">
+            <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreieyux3txgbvy5xvusemspi7ntu2rcdaovvgyvemrwwg4s73smgzy4" alt="Backrooms 10" loading="lazy">
+          </a>
+          <a class="img-cell" href="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreid72zm4ivirzingnqgbsklf4wtz6443spk3pzssalhbummr24jzru" target="_blank" rel="noopener">
+            <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:yuls7w4slvw7po3vw7xgqxix/bafkreid72zm4ivirzingnqgbsklf4wtz6443spk3pzssalhbummr24jzru" alt="Backrooms 11" loading="lazy">
+          </a>
+          <a class="img-cell" href="https://pbs.twimg.com/media/Gj4izcNWkAAGk4t?format=jpg&amp;name=large" target="_blank" rel="noopener">
+            <img src="https://pbs.twimg.com/media/Gj4izcNWkAAGk4t?format=jpg&amp;name=large" alt="Bride 1" loading="lazy">
+          </a>
+          <a class="img-cell" href="https://pbs.twimg.com/media/Gi_c0XyXoAEaZwO?format=jpg&amp;name=large" target="_blank" rel="noopener">
+            <img src="https://pbs.twimg.com/media/Gi_c0XyXoAEaZwO?format=jpg&amp;name=large" alt="Bride 2" loading="lazy">
+          </a>
+          <a class="img-cell" href="https://pbs.twimg.com/media/GiwFzRsX0AAq5Z_?format=jpg&amp;name=large" target="_blank" rel="noopener">
+            <img src="https://pbs.twimg.com/media/GiwFzRsX0AAq5Z_?format=jpg&amp;name=large" alt="Bride 3" loading="lazy">
+          </a>
+          <a class="img-cell" href="https://pbs.twimg.com/media/Gie6u5sW4AASmVx?format=jpg&amp;name=large" target="_blank" rel="noopener">
+            <img src="https://pbs.twimg.com/media/Gie6u5sW4AASmVx?format=jpg&amp;name=large" alt="Bride 4" loading="lazy">
+          </a>
+          <a class="img-cell" href="https://pbs.twimg.com/media/GiZGcGoWEAMwIfH?format=jpg&amp;name=large" target="_blank" rel="noopener">
+            <img src="https://pbs.twimg.com/media/GiZGcGoWEAMwIfH?format=jpg&amp;name=large" alt="Bride 5" loading="lazy">
+          </a>
+          <a class="img-cell" href="assets/arts/FerrariF40_upgrade.png" target="_blank" rel="noopener">
+            <img src="assets/arts/FerrariF40_upgrade_REDUCE.jpg" alt="FerrariF40 upgrade">
+          </a>
+          <a class="img-cell" href="assets/arts/FerrariF40_upgrade_White.png" target="_blank" rel="noopener">
+            <img src="assets/arts/FerrariF40_upgrade_White_REDUCE.jpg" alt="FerrariF40 upgrade White">
+          </a>
+          <a class="img-cell" href="assets/arts/Glass.jpg" target="_blank" rel="noopener">
+            <img src="assets/arts/Glass_Reduce.jpg" alt="Glass">
+          </a>
+          <a class="img-cell" href="assets/arts/I%20didn%27t%20even%20want%20to%20be%20here.jpg" target="_blank" rel="noopener">
+            <img src="assets/arts/I%20didn%27t%20even%20want%20to%20be%20here_Reduce.jpg" alt="I didn't even want to be here">
+          </a>
+          <a class="img-cell" href="assets/arts/Useless.png" target="_blank" rel="noopener">
+            <img src="assets/arts/Useless_Reduce.jpg" alt="Useless">
+          </a>
+          <a class="img-cell" href="assets/arts/WL_Bride.png" target="_blank" rel="noopener">
+            <img src="assets/arts/WL_Bride_Reduce.png" alt="WL Bride">
+          </a>
+          <a class="img-cell" href="assets/arts/WL_JustTrustFlag.png" target="_blank" rel="noopener">
+            <img src="assets/arts/WL_JustTrustFlag_Reduce.png" alt="WL JustTrustFlag">
+          </a>
+          <a class="img-cell" href="assets/arts/WL_TrustSpripe.png" target="_blank" rel="noopener">
+            <img src="assets/arts/WL_TrustSpripe_Reduce.png" alt="WL TrustSpripe">
+          </a>
+          <a class="img-cell" href="assets/arts/WL_WebElements.png" target="_blank" rel="noopener">
+            <img src="assets/arts/WL_WebElements_Reduce.png" alt="WL WebElements">
+          </a>
+          <a class="img-cell" href="assets/arts/WL_Wine.png" target="_blank" rel="noopener">
+            <img src="assets/arts/WL_Wine_Reduce.png" alt="WL Wine">
+          </a>
+          <a class="img-cell" href="assets/arts/WT_stg_danger.png" target="_blank" rel="noopener">
+            <img src="assets/arts/WT_stg_danger_Reduce.png" alt="WT stg danger">
+          </a>
+        </div>
+      </div>
+      <!-- About me -->
+      <div class="content-panel" data-panel="about-me">
+        <div class="about-content">
+          <p>Hello my name is Saitox</p>
+          <p>I am a 3D Animator, programmer, photographer, designer and artist in general.<br>This is my portfolio site and also to present my projects.
+            <br>Feel free to look around the site, here you will find wallpapers, games and my photographs that I take on a daily basis.
+            <br>You can see all of this on Projects.
+            <br>
+            <br>Website made with <strong>HTML</strong> / <strong>CSS</strong> / <strong>JAVASCRIPT</strong>
+          </p>
+        </div>
+      </div>
+      <!-- Contacts -->
+      <div class="content-panel" data-panel="about-contacts">
+        <div class="about-content">
+          <p>You can contact me through:</p>
+          <ul>
+            <li>Discord: <span class="contact-val">krueels</span></li>
+            <li>Email: <span class="contact-val">studio.bytelowergames@gmail.com</span></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Links -->
+      <div class="content-panel" data-panel="about-links">
+        <div class="about-content">
+          <div class="links-grid">
+            <a class="link-btn" href="https://www.youtube.com/@SaitoxBeats" target="_blank">Youtube</a>
+            <a class="link-btn" href="https://on.soundcloud.com/jqKu6rT4N6XlNlewJF" target="_blank">SoundCloud</a>
+            <a class="link-btn" href="https://x.com/SaitoxBeats" target="_blank">Twitter</a>
+            <a class="link-btn" href="https://bytelower.itch.io/" target="_blank">Itch.io</a>
+            <a class="link-btn" href="https://github.com/SaitoxBeats" target="_blank">Github</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
 </html>
